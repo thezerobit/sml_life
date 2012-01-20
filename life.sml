@@ -1,10 +1,17 @@
 
-val s = Vector.fromList [0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+type life_grid = int Vector.vector * int * int
+
+val grid = (Vector.fromList
+  [0,0,0,0,0,
+   0,1,1,1,0,
+   0,1,0,0,0,
+   0,0,1,0,0,
+   0,0,0,0,0], 5, 5)
 
 fun print_vector v =
   Vector.map (fn x:int => print ((Int.toString x) ^ " ")) v
 
-fun print_map (v, w, h) =
+fun print_grid (v, w, h) =
 let
   fun print_slice n =
     if n >= h then print "\n"
@@ -42,11 +49,18 @@ let
     else (case total of 3 => 1 | _ => 0)
   end
 in
-    Vector.mapi get_next v
+    (Vector.mapi get_next v, w, h)
 end;
 
-val _ = print_map (s, 5, 5)
-val s = iter (s,5,5)
-val _ = print_map (s, 5, 5)
-val s = iter (s,5,5)
-val _ = print_map (s, 5, 5)
+val _ = print_grid grid
+
+fun run (grid:life_grid, 0) = grid
+  | run (grid, n) =
+  let
+    val next = iter grid
+  in
+    run (next, n-1)
+  end;
+
+val d = run (grid, 100000)
+val _ = print_grid d
