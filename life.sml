@@ -6,17 +6,25 @@ fun print_vector v =
 
 fun iter (v : int Vector.vector, w : int, h : int) =
 let
-    val offsets = Vector.fromList[0-w-1,0-w,0-w+1,~1,1,w-1,w,w+1]
-    val length = w*h
-    fun get_next (i:int, current:int) =
-      let
-        val totals = Vector.map (fn x => Vector.sub (v, ((i+x) mod length)))
-          offsets
-        val total = Vector.foldl (op +) 0 totals
-      in
-        if current=1 then (case total of 2 => 1 | 3 => 1 | _ => 0)
-        else (case total of 3 => 1 | _ => 0)
-      end
+  val surrounding = Vector.fromList[(~1,~1), (0,~1), (1,~1),
+                                    (~1, 0),         (1, 0),
+                                    (~1, 1), (0, 1), (1, 1) ]
+  fun get_offset (current:int, (x:int, y:int)) =
+  let
+    val dest_x = (current + x) mod w
+    val dest_y = ((current div w) + y) mod h
+  in
+    dest_y * w + dest_x
+  end
+  fun get_next (i:int, current:int) =
+  let
+    val offsets = Vector.map (fn x => get_offset (i, x)) surrounding
+    val totals = Vector.map (fn x => Vector.sub (v, x)) offsets
+    val total = Vector.foldl (op +) 0 totals
+  in
+    if current=1 then (case total of 2 => 1 | 3 => 1 | _ => 0)
+    else (case total of 3 => 1 | _ => 0)
+  end
 in
     Vector.mapi get_next v
 end;
