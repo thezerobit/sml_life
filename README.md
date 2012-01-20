@@ -17,4 +17,9 @@ Python run with CPython 2.7.2:
 
 26.808 seconds
 
-So the SML version runs about 37 times faster.
+Python run with PyPy 1.7:
+
+6.415 seconds
+
+So the SML/MLton version is about 9 times faster than PyPy and 37
+times faster than CPython.
