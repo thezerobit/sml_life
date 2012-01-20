@@ -4,6 +4,22 @@ val s = Vector.fromList [0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 fun print_vector v =
   Vector.map (fn x:int => print ((Int.toString x) ^ " ")) v
 
+fun print_map (v, w, h) =
+let
+  fun print_slice n =
+    if n >= h then print "\n"
+    else
+      let
+        val _ = VectorSlice.map (fn x:int => print (Int.toString x))
+          (VectorSlice.slice (v, n*w, SOME w))
+        val _ = print "\n"
+      in
+        print_slice (n + 1)
+      end
+in
+  print_slice 0
+end
+
 fun iter (v : int Vector.vector, w : int, h : int) =
 let
   val surrounding = Vector.fromList[(~1,~1), (0,~1), (1,~1),
@@ -29,8 +45,8 @@ in
     Vector.mapi get_next v
 end;
 
-val _ = print_vector s
-val _ = print "\n"
-val n = iter (s,5,5)
-val _ = print_vector n
-val _ = print "\n"
+val _ = print_map (s, 5, 5)
+val s = iter (s,5,5)
+val _ = print_map (s, 5, 5)
+val s = iter (s,5,5)
+val _ = print_map (s, 5, 5)
