@@ -8,9 +8,6 @@ val grid = (Vector.fromList
    0,0,1,0,0,
    0,0,0,0,0], 5, 5)
 
-fun print_vector v =
-  Vector.map (fn x:int => print ((Int.toString x) ^ " ")) v
-
 fun print_grid (v, w, h) =
 let
   fun print_slice n =
@@ -31,7 +28,7 @@ fun iter (v : int Vector.vector, w : int, h : int) =
 let
   val surrounding = Vector.fromList[(~1,~1), (0,~1), (1,~1),
                                     (~1, 0),         (1, 0),
-                                    (~1, 1), (0, 1), (1, 1) ]
+                                    (~1, 1), (0, 1), (1, 1)]
   fun get_offset (current:int, (x:int, y:int)) =
   let
     val dest_x = (current + x) mod w
