@@ -1,22 +1,24 @@
 module Main where
 main = putStrLn result
 
+type Grid = ([Int], Int, Int)
+
 grid = (
   [0,0,0,0,0,
-    0,1,1,1,0,
-    0,1,0,0,0,
-    0,0,1,0,0,
-    0,0,0,0,0], 5, 5)
+   0,1,1,1,0,
+   0,1,0,0,0,
+   0,0,1,0,0,
+   0,0,0,0,0], 5, 5) :: Grid
 
 cellToChar 0 = '0'
 cellToChar 1 = '1'
 
-gridToStr :: ([Int], Int, Int) -> [Char]
+gridToStr :: Grid -> [Char]
 gridToStr ([], w, h) = []
 gridToStr (v, w, h) = [ cellToChar x | x <- (take w v) ] ++ "\n" ++
   gridToStr (drop w v, w, h)
 
-iter :: ([Int], Int, Int) -> ([Int], Int, Int)
+iter :: Grid -> Grid
 iter (v, w, h) =
   let surrounding = [(-1,-1), (0,-1), (1,-1),
                      (-1, 0),         (1, 0),
@@ -37,7 +39,7 @@ iter (v, w, h) =
                               _ -> 0)
   in ((map (\(x,i) -> getNext (i, x)) (zip v [0..])), w, h)
 
-run :: (([Int], Int, Int), Int) -> ([Int], Int, Int)
+run :: (Grid, Int) -> Grid
 run (agrid, 0) = agrid
 run (agrid, n) =
   let next = iter agrid
