@@ -1,1 +1,5 @@
-life
+haskell/life
+haskell/life-array
+haskell/*.o
+haskell/*.hi
+sml/life
