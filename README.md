@@ -27,11 +27,9 @@ Clojure 1.3:
 
 Haskell with GHC 7.0.3:
 
-104.905 seconds (compiled)
+??? seconds (compiled with -O2)
 
 So the SML/MLton version is about 9 times faster than PyPy and 37
 times faster than CPython. Clojure comes in a close 3rd, just a bit
-slower than PyPy. Haskell was really disappointing. I tried to improve
-Haskell by utilizing unboxed Arrays in the file life-array.hs, but that
-version causes a stack overflow.
-
+slower than PyPy. Haskell time improved dramatically by compiling with
+"-O2", will update time when I'm at my benchmarking machine next.

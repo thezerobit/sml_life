@@ -23,13 +23,14 @@ iter (v, w, h) =
   let surrounding = [(-1,-1), (0,-1), (1,-1),
                      (-1, 0),         (1, 0),
                      (-1, 1), (0, 1), (1, 1)]
-      getOffset :: (Int, (Int, Int)) -> Int
-      getOffset (current, (x, y)) =
+      getOffset :: Int -> (Int, Int) -> Int
+      getOffset current (x, y) =
         let destX = (current + x) `mod` w
             destY = ((current `div` w) + y) `mod` h
         in destY * w + destX
-      getNext (i, current) =
-        let offsets = map (\x -> getOffset (i, x)) surrounding
+      getNext :: Int -> Int -> Int
+      getNext i current =
+        let offsets = map (\x -> getOffset i x) surrounding
             totals = map (\x -> (v !! x)) offsets
             total = foldl (+) 0 totals
         in if current==1 then (case total of 2 -> 1
@@ -37,14 +38,14 @@ iter (v, w, h) =
                                              _ -> 0)
           else (case total of 3 -> 1
                               _ -> 0)
-  in ((map (\(x,i) -> getNext (i, x)) (zip v [0..])), w, h)
+   in ((zipWith getNext [0..] v), w, h)
 
-run :: (Grid, Int) -> Grid
-run (agrid, 0) = agrid
-run (agrid, n) =
+run :: Grid -> Int -> Grid
+run agrid 0 = agrid
+run agrid n =
   let next = iter agrid
-  in run (next, (n - 1))
+  in run next (n - 1)
 
-d = run (grid, 100000)
+d = run grid 100000
 result = (gridToStr grid) ++ "\n" ++ (gridToStr d)
 
