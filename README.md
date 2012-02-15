@@ -27,9 +27,11 @@ Clojure 1.3:
 
 Haskell with GHC 7.0.3:
 
-??? seconds (compiled with -O2)
+28.117 seconds (compiled with -O2 using [Int])
+22.561 seconds (compiled with -O2 using UArray Int Int)
 
 So the SML/MLton version is about 9 times faster than PyPy and 37
 times faster than CPython. Clojure comes in a close 3rd, just a bit
-slower than PyPy. Haskell time improved dramatically by compiling with
-"-O2", will update time when I'm at my benchmarking machine next.
+slower than PyPy. Haskell time is comparable with CPython, when compiled
+with -O2 and a bit faster if I use an Unboxed Array as opposed to a
+normal list.
