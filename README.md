@@ -35,14 +35,26 @@ Chicken Scheme 4.7.0
 
 15.494 seconds (compiled with -O4)
 
+Stalin Scheme
+
+1.358 seconds (compiled with -On -copt -O2)
+
 So the SML/MLton version is about 9 times faster than PyPy and 37
-times faster than CPython. Clojure comes in a close 3rd, just a bit
+times faster than CPython. Clojure comes in a close 4th, just a bit
 slower than PyPy. Haskell time is comparable with CPython, when compiled
 with -O2 using a normal list. I switched out the list for an Unboxed
 Array which shaved a few seconds off, and then with a bunch of reading
 and experimentation found a single strictness hint that cut the time
 roughly in half down to 11.935 seconds which is in the same order though
 slower than Clojure and PyPy.
+
+After implementing the solution in Chicken Scheme, utilizing srfi-1 and
+srfi-4 to get some functions like "fold" and homogenous vectors, I found
+a highly optimizing Scheme compiler called Stalin. It's R4RS compliant,
+only, so I had to adapt the code, which just meant implementing "fold"
+and "subvector" and using generic vectors. Stalin truly does optimize
+brutally, eclipsed only by MLton (by a factor of 2) and being the fastest
+dynamic language implementation.
 
 TODO:
 

@@ -4,3 +4,4 @@ haskell/*.o
 haskell/*.hi
 sml/life
 scheme/life
+scheme/life.db
