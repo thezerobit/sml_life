@@ -3,3 +3,4 @@ haskell/life-array
 haskell/*.o
 haskell/*.hi
 sml/life
+scheme/life
