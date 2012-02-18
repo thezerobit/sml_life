@@ -46,7 +46,7 @@ iter (v, w, h) =
                                              _ -> 0)
           else (case total of 3 -> 1
                               _ -> 0)
-  in (gridArrayFromList $ zipWith getNext [0..] $ elems v, w, h)
+  in (gridArrayFromList $ zipWith getNext [0..] $! elems v, w, h)
 
 run :: Grid -> Int -> Grid
 run agrid 0 = agrid
