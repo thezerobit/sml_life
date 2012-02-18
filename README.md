@@ -31,9 +31,9 @@ Haskell with GHC 7.0.3:
 11.935 seconds (compiled with -O2 using UArray Int Int and a single
 strictness hint)
 
-Chicken Scheme
+Chicken Scheme 4.7.0
 
-18.495 seconds
+15.494 seconds (compiled with -O4)
 
 So the SML/MLton version is about 9 times faster than PyPy and 37
 times faster than CPython. Clojure comes in a close 3rd, just a bit
