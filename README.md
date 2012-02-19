@@ -43,6 +43,14 @@ Racket v5.1.1 (scheme)
 
 6.081 seconds
 
+SBCL 1.0.50 (Common Lisp)
+
+7.070 seconds
+
+Clozure CL 1.7 (Common Lisp)
+
+13.192 seconds
+
 So the SML/MLton version is about 9 times faster than PyPy and 37
 times faster than CPython. Clojure comes in a close 4th, just a bit
 slower than PyPy. Haskell time is comparable with CPython, when compiled
@@ -59,6 +67,15 @@ only, so I had to adapt the code, which just meant implementing "fold"
 and "subvector" and using generic vectors. Stalin truly does optimize
 brutally, eclipsed only by MLton (by a factor of 2) and being the fastest
 dynamic language implementation.
+
+Common Lisp has some nice things like DESTRUCTURING-BIND which works a
+bit like native destructuring in Clojure. LABELS replaced LETREC in
+Scheme. SBCL and Clozure seem to handle the recursive loop fine. MAP
+handles vectors as well as lists. Lisp-2 is annoying with sharp-quoting
+function names and having to use APPLY. Common Lisp solution ended up
+being short: around 50 lines, like Haskell, Python, Clojure. Common Lisp
+seems like a much stabler target than all the various Scheme versions
+and implementation quirks.
 
 TODO:
 
