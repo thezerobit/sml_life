@@ -1,14 +1,14 @@
 (define (vector-mapi fn v)
-  (letrec ((len (vector-length v))
-           (fresh (make-vector len))
-           (internal
-             (lambda (i)
-               (if (< i len)
-                   (begin
-                     (vector-set! fresh i (fn i (vector-ref v i)))
-                     (internal (+ i 1)))))))
-    (internal 0)
-    fresh))
+  (let* ((len (vector-length v))
+         (fresh (make-vector len)))
+    (letrec ((internal
+              (lambda (i)
+                (if (< i len)
+                    (begin
+                      (vector-set! fresh i (fn i (vector-ref v i)))
+                      (internal (+ i 1)))))))
+      (internal 0)
+      fresh)))
 
 (define (vector-do fn v)
   (map fn (vector->list v)))
@@ -19,15 +19,15 @@
     (fold fn (fn nil (car lst)) (cdr lst))))
 
 (define (subvector v start end)
-  (letrec ((len (- end start))
-           (newvec (make-vector len))
-           (ins (lambda (i)
-                  (if (< i end)
-                    (begin 
-                      (vector-set! newvec (- i start) (vector-ref v i))
-                      (ins (+ i 1)))))))
-    (ins start)
-    newvec))
+  (let* ((len (- end start))
+         (newvec (make-vector len)))
+    (letrec ((ins (lambda (i)
+                    (if (< i end)
+                      (begin
+                        (vector-set! newvec (- i start) (vector-ref v i))
+                        (ins (+ i 1)))))))
+      (ins start)
+      newvec)))
 
 (define grid (vector
   (vector 0 0 0 0 0
