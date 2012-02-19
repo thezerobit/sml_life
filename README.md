@@ -51,6 +51,10 @@ Clozure CL 1.7 (Common Lisp)
 
 13.192 seconds
 
+node.js 0.4.9 (JavaScript)
+
+14.615 seconds
+
 So the SML/MLton version is about 9 times faster than PyPy and 37
 times faster than CPython. Clojure comes in a close 4th, just a bit
 slower than PyPy. Haskell time is comparable with CPython, when compiled
@@ -76,6 +80,14 @@ function names and having to use APPLY. Common Lisp solution ended up
 being short: around 50 lines, like Haskell, Python, Clojure. Common Lisp
 seems like a much stabler target than all the various Scheme versions
 and implementation quirks.
+
+JavaScript is a terrible language for doing math. I had to write a
+modulo function that imitates the way modulus works in every other
+language so far and I had to do a weird hack to get integer division
+working. It's unnerving doing integer math with real numbers. The
+language is fairly verbose. I expected V8 to perform similarly to PyPy
+but the results were disappointing. However, it's probably because of
+the math hackery in the inner-most loops that's slowing it down.
 
 TODO:
 
