@@ -39,6 +39,10 @@ Stalin Scheme
 
 1.358 seconds (compiled with -On -copt -O2)
 
+Racket v5.1.1 (scheme)
+
+6.081 seconds
+
 So the SML/MLton version is about 9 times faster than PyPy and 37
 times faster than CPython. Clojure comes in a close 4th, just a bit
 slower than PyPy. Haskell time is comparable with CPython, when compiled
@@ -59,5 +63,3 @@ dynamic language implementation.
 TODO:
 
 Numpy
-Other Scheme impl
-PyPy 1.8
