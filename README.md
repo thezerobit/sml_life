@@ -39,9 +39,10 @@ Stalin Scheme
 
 1.358 seconds (compiled with -On -copt -O2)
 
-Racket v5.1.1 (scheme)
+Racket v5.1.1 "racket" language (Scheme)
 
-6.081 seconds
+5.656 seconds (compiled "racket" lang)
+6.260 seconds (compiled "typed/racket" lang)
 
 SBCL 1.0.50 (Common Lisp)
 
@@ -71,6 +72,14 @@ only, so I had to adapt the code, which just meant implementing "fold"
 and "subvector" and using generic vectors. Stalin truly does optimize
 brutally, eclipsed only by MLton (by a factor of 2) and being the fastest
 dynamic language implementation.
+
+Racket seems to a be a pretty interesting project right now. I had fun
+adapting the code to the "typed/racket" variant which uses
+static/inferred typing. There were no speed gains from the conversion,
+but in my mind the usefulness of static type verification is in program
+correctness and ease of development. The type errors emitted by the
+compiler were extremely easy to understand and fix. Racket performed
+admirably, too.
 
 Common Lisp has some nice things like DESTRUCTURING-BIND which works a
 bit like native destructuring in Clojure. LABELS replaced LETREC in
