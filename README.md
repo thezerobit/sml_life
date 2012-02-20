@@ -56,8 +56,12 @@ node.js 0.4.9 (JavaScript)
 
 14.615 seconds
 
+GCC 4.6.1 (C)
+
+0.322 seconds (compiled with -O2)
+
 So the SML/MLton version is about 9 times faster than PyPy and 37
-times faster than CPython. Clojure comes in a close 4th, just a bit
+times faster than CPython. Clojure has a decent showing, just a bit
 slower than PyPy. Haskell time is comparable with CPython, when compiled
 with -O2 using a normal list. I switched out the list for an Unboxed
 Array which shaved a few seconds off, and then with a bunch of reading
@@ -92,12 +96,29 @@ and implementation quirks.
 
 JavaScript is a terrible language for doing math. I had to write a
 modulo function that imitates the way modulus works in every other
-language so far and I had to do a weird hack to get integer division
-working. It's unnerving doing integer math with real numbers. The
-language is fairly verbose. I expected V8 to perform similarly to PyPy
-but the results were disappointing. However, it's probably because of
-the math hackery in the inner-most loops that's slowing it down.
+language (except C) so far and I had to do a weird hack to get integer
+division working. It's unnerving doing integer math with real numbers.
+The language is fairly verbose. I expected V8 to perform similarly to
+PyPy but the results were disappointing. However, it's probably because
+of the math hackery in the inner-most loops that's slowing it down.
+
+Implementing this in C reminds me why I don't write go out of my way to
+write code in C. Without support for lambdas and recursion, I
+compromised the algorithm the most with the C implementation, using
+plenty of for loops, separating nested functions into separate top-level
+functions and passing around variables that otherwise were just captured
+in the environment of the closures in all other implementations (so
+far). This was the most verbose solution and I even "cheated" by relying
+on Boehm GC for garbage collection instead of doing it manually or
+writing it to run in constant-space on the stack. As usual, C
+performance blows away everything else, beating even MLton by a factor of 2.
+It may be the fastest, but I felt like the compiler had me doing most
+of the optimization by hand.
+
+Found a webpage with some similar benchmarks:
+http://www.ffconsultancy.com/ocaml/ray_tracer/languages.html
 
 TODO:
 
+Ocaml
 Numpy
