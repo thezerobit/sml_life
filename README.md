@@ -28,8 +28,11 @@ Clojure 1.3:
 Haskell with GHC 7.0.3:
 
 28.117 seconds (compiled with -O2 using [Int])
+
 11.935 seconds (compiled with -O2 using UArray Int Int and a single
 strictness hint)
+
+1.375 seconds Using Data.Vector (contributed)
 
 Chicken Scheme 4.7.0
 
