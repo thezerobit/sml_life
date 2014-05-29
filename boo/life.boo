@@ -36,9 +36,9 @@ def iter_(g as Grid):
     v as (int) = g.v
     w = g.w
     h = g.h
-    surrounding = [(-1,-1), (0,-1), (1,-1),
+    surrounding = ((-1,-1), (0,-1), (1,-1),
                    (-1, 0),         (1, 0),
-                   (-1, 1), (0, 1), (1, 1)]
+                   (-1, 1), (0, 1), (1, 1))
     def get_offset(current as int, x as int, y as int):
         dest_x = mod((current + x), w)
         dest_y = mod((current / w) + y,  w)
