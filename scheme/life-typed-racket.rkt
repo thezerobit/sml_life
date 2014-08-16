@@ -21,8 +21,8 @@
 
 (: subvector ((Vectorof Integer) Integer Integer -> (Vectorof Integer)))
 (define (subvector v start end)
-  (let* ((len (- end start))
-         (newvec (make-vector len)))
+  (let*: ((len : Integer (- end start))
+          (newvec : (Vectorof Integer) (make-vector len)))
     (letrec: ((ins : (Integer -> Void)
                 (lambda (i)
                   (when (< i end)
